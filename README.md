@@ -11,3 +11,4 @@ https://tube.switch.ch/videos/c3f982f2
 3) Adjust image filters to equalize background intensity.
 4) Montage each section individually.
 5) Align sections to eachother, linear then elastic.
+6) Export images as tiles for CATMAID using `export_for_CATMAID.bsh`.
