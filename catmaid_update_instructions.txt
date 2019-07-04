@@ -1,0 +1,31 @@
+0) Read update notes to make sure nothing special needs to be done for this update.
+
+1) Sign into the server using ssh
+ssh mwang@catmaid.nemanode.org
+
+2) Take CATMAID offline:
+sudo service nginx stop
+
+3) Change to CATMAID user:
+su catmaid_user
+cd
+
+4) Make sure there are recent backups of database and catmaid repository files.
+run: cp -r catmaid catmaid_old_version
+check that today's backup of database exists in /mnt/hdd1/backups/
+
+5) Remove any local changes to catmaid files (e.g. catmaid/django/applications/catmaid/static/js/widgets/overlay.js)
+git checkout catmaid/django/applications/catmaid/static/js/widgets/overlay.js
+
+6) Follow https://catmaid.readthedocs.io/en/stable/administration.html; for example:
+cd catmaid
+git pull origin master
+cd django
+workon catmaid (instead of 'source env/bin/activate')
+pip install -r requirements.txt
+./projects/manage.py migrate
+./projects/manage.py collectstatic -l
+deactivate
+
+7) Restart the server to ensure postgresql, nginx, and uwsgi service restarts
+
